@@ -1,0 +1,30 @@
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.5.2.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Weathermonitor", "Weathermonitor\Weathermonitor.csproj", "{8086F1D4-F6B3-DBA7-4464-E170C61AB12C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WeathermonitorLib", "Weathermonitorlib\WeathermonitorLib.csproj", "{F4DF4A95-4851-5409-E7AA-1232C4CFC333}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{8086F1D4-F6B3-DBA7-4464-E170C61AB12C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8086F1D4-F6B3-DBA7-4464-E170C61AB12C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8086F1D4-F6B3-DBA7-4464-E170C61AB12C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8086F1D4-F6B3-DBA7-4464-E170C61AB12C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F4DF4A95-4851-5409-E7AA-1232C4CFC333}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F4DF4A95-4851-5409-E7AA-1232C4CFC333}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F4DF4A95-4851-5409-E7AA-1232C4CFC333}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F4DF4A95-4851-5409-E7AA-1232C4CFC333}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {30460288-8396-40CB-811E-4D01D1E25EF6}
+	EndGlobalSection
+EndGlobal
