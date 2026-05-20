@@ -1,5 +1,4 @@
 namespace WeatherMonitor.AsyncOps;
-
 public static class AsyncMap
 {
     public static void MapCallback<TIn, TOut>(
@@ -23,5 +22,21 @@ public static class AsyncMap
                 onError?.Invoke(ex);
             }
         });
+    }
+    public static Task<TOut[]> MapAsync<TIn, TOut>(
+        IEnumerable<TIn> source,
+        Func<TIn, Task<TOut>> asyncSelector,
+        CancellationToken ct = default)
+    {
+        return Task.Run(async () =>
+        {
+            var results = new List<TOut>();
+            foreach (var item in source)
+            {
+                ct.ThrowIfCancellationRequested();
+                results.Add(await asyncSelector(item));
+            }
+            return results.ToArray();
+        }, ct);
     }
 }
