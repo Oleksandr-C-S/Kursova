@@ -1,8 +1,8 @@
 namespace WeatherMonitor.DataStructures;
 public record QueueItem<T>(
-    T Value,
-    int Priority,
-    long InsertionOrder
+    T Value,          
+    int Priority,     
+    long InsertionOrder 
 );
 public class BiDiPriorityQueue<T>
 {
@@ -18,14 +18,22 @@ public class BiDiPriorityQueue<T>
     public T Peek(string mode)
     {
         EnsureNotEmpty();
-        return FindItem(mode).Value;
+        return FindItem(mode).Value; 
+    }
+    public T Dequeue(string mode)
+    {
+        EnsureNotEmpty();
+        var item = FindItem(mode); 
+        _list.Remove(item);     
+        return item.Value;
     }
     private QueueItem<T> FindItem(string mode) => mode switch
     {
+
         "highest" => _list.OrderByDescending(x => x.Priority).First(),
-        "lowest" => _list.OrderBy(x => x.Priority).First(),
-        "oldest" => _list.OrderBy(x => x.InsertionOrder).First(),
-        "newest" => _list.OrderByDescending(x => x.InsertionOrder).First(),
+        "lowest"  => _list.OrderBy(x => x.Priority).First(),
+        "oldest"  => _list.OrderBy(x => x.InsertionOrder).First(),
+        "newest"  => _list.OrderByDescending(x => x.InsertionOrder).First(),
         _ => throw new ArgumentException($"Невідомий режим: '{mode}'. " +
                                          "Допустимі: highest, lowest, oldest, newest")
     };
