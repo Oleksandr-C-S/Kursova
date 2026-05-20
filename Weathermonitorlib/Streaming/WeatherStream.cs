@@ -12,6 +12,7 @@ public static class WeatherStream
         while ((line = await reader.ReadLineAsync(ct)) != null)
         {
             ct.ThrowIfCancellationRequested();
+
             if (string.IsNullOrWhiteSpace(line) || line.StartsWith('#'))
                 continue;
             if (double.TryParse(
@@ -23,5 +24,29 @@ public static class WeatherStream
                 yield return temp;
             }
         }
+    }
+    public static async Task<(double Min, double Max, double Avg, long Count)>
+        ComputeStatsAsync(IAsyncEnumerable<double> stream)
+    {
+        double min = double.MaxValue;
+        double max = double.MinValue;
+        double sum = 0;
+        long count = 0;
+        await foreach (var temp in stream)
+        {
+            if (temp < min) min = temp;
+            if (temp > max) max = temp;
+            sum += temp;
+            count++;
+            if (count % 10_000 == 0)
+                Console.Write($"\r  Оброблено: {count:N0} записів...");
+        }
+        Console.WriteLine();
+        return (
+            min,
+            max,
+            count > 0 ? sum / count : 0,
+            count
+        );
     }
 }
