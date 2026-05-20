@@ -15,6 +15,25 @@ public class BiDiPriorityQueue<T>
         var node = new QueueItem<T>(item, priority, _insertionCounter++);
         _list.AddLast(node);
     }
+    public T Peek(string mode)
+    {
+        EnsureNotEmpty();
+        return FindItem(mode).Value;
+    }
+    private QueueItem<T> FindItem(string mode) => mode switch
+    {
+        "highest" => _list.OrderByDescending(x => x.Priority).First(),
+        "lowest" => _list.OrderBy(x => x.Priority).First(),
+        "oldest" => _list.OrderBy(x => x.InsertionOrder).First(),
+        "newest" => _list.OrderByDescending(x => x.InsertionOrder).First(),
+        _ => throw new ArgumentException($"Невідомий режим: '{mode}'. " +
+                                         "Допустимі: highest, lowest, oldest, newest")
+    };
+    private void EnsureNotEmpty()
+    {
+        if (IsEmpty)
+            throw new InvalidOperationException("Черга порожня.");
+    }
     public override string ToString()
     {
         return "[" + string.Join(", ", _list.Select(x => $"{x.Value}(p={x.Priority})")) + "]";
